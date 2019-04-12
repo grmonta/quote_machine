@@ -1,20 +1,22 @@
 import React from 'react';
 
 import axios from 'axios';
+import './style.css';
 // eslint-disable-next-line no-unused-vars
-import quotes from './quotes';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       quote: '',
-      author: ''
+      author: '',
+      imageURL: ''
     };
   }
 
   componentDidMount() {
     this.getQuote();
+    this.getImage();
   }
 
   //how to get the quote form a json api with axios
@@ -36,29 +38,111 @@ class App extends React.Component {
     });
   }
 
+  getImage() {
+    let url =
+      'https://api.unsplash.com/photos/random/?client_id=a5ec42e211d11a16c16ab8ead611202c86fbf358c7805c86b9471a05f4e8eb12';
+    axios.get(url).then(results => {
+      let data = results.data;
+      console.log(data);
+      let imageData = data.urls.small;
+
+      this.setState({
+        imageURL: imageData
+      });
+    });
+  }
+  getNewImage = () => {
+    this.getImage();
+  };
+
   getNewQuote = () => {
     this.getQuote();
   };
 
   render() {
     return (
-      <div className="container" id="quote-box">
-        <div className="quote-container">
-          <h1 id="text">{this.state.quote}</h1>
-          <p id="author"> {this.state.author}</p>
+      <div className="container page-wrapper">
+        <h1 className="text-center">Random Quote and Image Generator</h1>
+        <div className="container " id="quote-box">
+          <div className="quote-container card">
+            <div className="card-body  text-center">
+              <blockquote className="blockquote">
+                <p id="text">{this.state.quote}</p>
+                <footer id="author">-{this.state.author}</footer>
+              </blockquote>
+            </div>
+            <div className="buttons btn-group d-flex justify-content-center ">
+              <Button
+                id="tweet-quote"
+                href="twitter.com/intent/tweet"
+                icon="fab fa-twitter"
+                name="  twitter"
+              />
+
+              <Button
+                href="https://pinterest.com/pin/create/button/?url=&media=&description="
+                icon="fab fa-pinterest"
+              />
+              <Button
+                id="new-quote"
+                onClick={this.getNewQuote}
+                icon="fas fa-arrow-right"
+                name="next quote"
+              />
+            </div>
+          </div>
+
+          <p />
+          <div className="image-container card">
+            <img
+              src={this.state.imageURL}
+              alt=""
+              className="mx-auto d-block img-thumbnail card-img-top img-fluid"
+            />
+            <div className="btn-group d-flex justify-content-center ">
+              <Button
+                id="tweet-quote"
+                href="twitter.com/intent/tweet"
+                icon="fab fa-twitter"
+                name="  twitter"
+              />
+              <Button
+                id="pinterest"
+                href="https://pinterest.com/pin/create/button/?url=&media=&description="
+                icon="fab fa-pinterest"
+              />
+              <Button
+                onClick={this.getNewImage}
+                icon="fas fa-arrow-right"
+                name="next image"
+              />
+            </div>
+          </div>
         </div>
-        <div className="buttons button-container">
-          <a href="twitter.com/intent/tweet">
-            <button id="tweet-quote">Twitter</button>
-          </a>
-          <button>Pinterest</button>
-          <button id="new-quote" onClick={this.getNewQuote}>
-            next quote
-          </button>
-        </div>
+        <footer className="container d-flex justify-content-center">
+          by Giovan
+        </footer>
       </div>
     );
   }
 }
+
+const Button = props => {
+  return (
+    <div>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id={props.id}
+        onClick={props.onClick}
+      >
+        <a href={props.href}>
+          <i class={props.icon} />
+        </a>
+        {props.name}
+      </button>
+    </div>
+  );
+};
 
 export default App;
