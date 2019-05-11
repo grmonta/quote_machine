@@ -1,3 +1,5 @@
+This is a simple random quote and image app for when you need a distraction. 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
