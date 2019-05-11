@@ -61,10 +61,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container page-wrapper">
-        <h1 className="text-center">Random Quote and Image Generator</h1>
+      <div className="container page-wrapper" id="page-wrapper">
+        <h1 className="text-center" id="title">
+          Make a Quote Match an Image
+        </h1>
         <div className="container " id="quote-box">
           <div className="quote-container card">
+            <img
+              src={this.state.imageURL}
+              alt="random"
+              className=" card-img-top "
+            />
             <div className="card-body  text-center">
               <blockquote className="blockquote">
                 <p id="text">{this.state.quote}</p>
@@ -73,13 +80,6 @@ class App extends React.Component {
             </div>
             <div className="buttons btn-group d-flex justify-content-center ">
               <Button
-                id="tweet-quote"
-                href="twitter.com/intent/tweet"
-                icon="fab fa-twitter"
-                name="  twitter"
-              />
-
-              <Button
                 href="https://pinterest.com/pin/create/button/?url=&media=&description="
                 icon="fab fa-pinterest"
               />
@@ -87,34 +87,12 @@ class App extends React.Component {
                 id="new-quote"
                 onClick={this.getNewQuote}
                 icon="fas fa-arrow-right"
-                name="next quote"
-              />
-            </div>
-          </div>
-
-          <p />
-          <div className="image-container card">
-            <img
-              src={this.state.imageURL}
-              alt=""
-              className="mx-auto d-block img-thumbnail card-img-top img-fluid"
-            />
-            <div className="btn-group d-flex justify-content-center ">
-              <Button
-                id="tweet-quote"
-                href="twitter.com/intent/tweet"
-                icon="fab fa-twitter"
-                name="  twitter"
-              />
-              <Button
-                id="pinterest"
-                href="https://pinterest.com/pin/create/button/?url=&media=&description="
-                icon="fab fa-pinterest"
+                name=" next quote"
               />
               <Button
                 onClick={this.getNewImage}
                 icon="fas fa-arrow-right"
-                name="next image"
+                name=" next image"
               />
             </div>
           </div>
@@ -132,12 +110,12 @@ const Button = props => {
     <div>
       <button
         type="button"
-        class="btn btn-secondary"
+        className="btn btn-secondary"
         id={props.id}
         onClick={props.onClick}
       >
         <a href={props.href}>
-          <i class={props.icon} />
+          <i className={props.icon} />
         </a>
         {props.name}
       </button>

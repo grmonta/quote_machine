@@ -1,3 +1,25 @@
 body {
-  background-color: hsl(#dae2d9);
+  background-color: rgba(88, 138, 151, 1);
+  font-family: 'Comfortaa', cursive;
+}
+
+#title {
+  font-size: 20px;
+  margin-top: 4px;
+}
+#text {
+  font-family: 'Comfortaa', cursive;
+}
+
+#author {
+  font-family: 'Petit Formal Script', cursive;
+}
+
+#quote-box img {
+  width: 100%;
+  height: 400px;
+}
+
+button:hover {
+  background-color: white;
 }
